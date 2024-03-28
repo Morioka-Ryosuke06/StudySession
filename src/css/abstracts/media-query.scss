@@ -1,0 +1,32 @@
+/// @group size
+$base-width-tb: 768px;
+/// @group size
+$base-width-pc: 1600px;
+
+$diff: 0.02px;
+
+/// @group media query
+$media-pc: 'screen and (min-width: #{$base-width-tb})';
+$media-sp: 'screen and (max-width:#{$base-width-tb - $diff})';
+
+// $media-tb: 'screen and (min-width: #{$base-width-tb}) and (max-width: #{$base-width-tb - $diff})';
+
+/// @group media query
+@mixin media-sp {
+  @media #{$media-sp} {
+    @content;
+  }
+}
+
+// @mixin media-tb {
+//   @media #{$media-tb} {
+//     @content;
+//   }
+// }
+
+/// @group media query
+@mixin media-pc {
+  @media #{$media-pc} {
+    @content;
+  }
+}
