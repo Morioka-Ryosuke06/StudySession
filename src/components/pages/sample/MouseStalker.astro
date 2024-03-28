@@ -1,0 +1,79 @@
+---
+
+---
+
+<div class="MouseStalker" data-mouse-element></div>
+<nav>
+  <ul>
+    <li><a href="" data-link-target>aaa</a></li>
+    <li><a href="" data-link-target>aaa</a></li>
+    <li><a href="" data-link-target>aaa</a></li>
+  </ul>
+</nav>
+<style lang="scss">
+  .MouseStalker {
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  function init() {
+    const MouseStalkerEl = document.querySelector('[data-mouse-element]');
+    document.addEventListener('mousemove', (event) => {
+      const { clientX: mouseX, clientY: mouseY } = event;
+
+      gsap.to(MouseStalkerEl, {
+        duration: 0.5,
+        x: mouseX,
+        y: mouseY,
+        ease: 'power2.out',
+      });
+    });
+
+    setupLinkEvents(MouseStalkerEl);
+  }
+
+  function setupLinkEvents(MouseStalkerEl) {
+    console.log(MouseStalkerEl);
+    const linkTargets = document.querySelectorAll('[data-link-target]');
+    linkTargets.forEach((linkTarget) => {
+      linkTarget.addEventListener('mouseover', () => {
+        handleMouseOver(MouseStalkerEl);
+      });
+
+      linkTarget.addEventListener('mouseleave', () => {
+        handleMouseLeave(MouseStalkerEl);
+      });
+    });
+  }
+
+  function handleMouseOver(MouseStalkerEl) {
+    gsap.to(MouseStalkerEl, {
+      opacity: 0,
+    });
+  }
+
+  function handleMouseLeave(MouseStalkerEl) {
+    gsap.to(MouseStalkerEl, {
+      opacity: 1,
+    });
+  }
+
+  init();
+</script>
